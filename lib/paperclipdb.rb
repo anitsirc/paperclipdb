@@ -1,9 +1,5 @@
-require 'paperclipdb/storage.rb'
+require "paperclipdb/engine"
+require 'paperclipdb/storage'
 
 module Paperclipdb
-  class << self
-    def self.version
-      "0.1"
-    end
-  end
 end
