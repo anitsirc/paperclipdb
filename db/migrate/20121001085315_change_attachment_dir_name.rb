@@ -1,9 +1,9 @@
 class ChangeAttachmentDirName < ActiveRecord::Migration
   def up
-    ActiveRecord::Base.connection.execute("UPDATE paperclipdb SET dir_name='/paperclipdb'+dir_name")
+    Paperclipdb::Attachment.all.each{|a| a.update_attribute(:dir_name, "/paperclipdb#{a.dir_name}") unless a.dir_name.start_with?("/paperclipdb")}
   end
 
   def down
-    ActiveRecord::Base.connection.execute("UPDATE paperclipdb SET dir_name=REPLACE(dir_name, '/paperclipdb', '')")
+    Paperclipdb::Attachment.all.each{|a| a.update_attribute(:dir_name, a.dir_name.gsub("/paperclipdb/", "/")) if a.dir_name.start_with?("/paperclipdb")}
   end
 end
