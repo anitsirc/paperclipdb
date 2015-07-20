@@ -1,5 +1,5 @@
 module Paperclipdb
   class Attachment < ActiveRecord::Base
-    attr_accessible :base_name, :dir_name, :file_data, :content_type, :file_size
+    attr_accessible :base_name, :dir_name, :file_data, :content_type, :file_size if defined? ActiveModel::MassAssignmentSecurity
   end
 end
