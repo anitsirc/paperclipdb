@@ -21,8 +21,7 @@ module Paperclip
 
       def getAttachment(file_path)
         file_path = rel_path(file_path)
-        return Paperclipdb::Attachment.find(:first, 
-          :conditions => [ "base_name = ? AND dir_name = ?", File.basename(file_path), File.dirname(file_path) ])
+        return Paperclipdb::Attachment.where(base_name: File.basename(file_path), dir_name: File.dirname(file_path)).first
       end
 
       def to_file style = default_style
