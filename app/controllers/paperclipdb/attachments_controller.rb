@@ -9,7 +9,8 @@ module Paperclipdb
       if(attachment == nil)
         raise ActionController::RoutingError.new('Image not Found')
       else
-        send_data(attachment.file_data)
+        content_type = attachment.content_type || MIME::Types.type_for(attachment.base_name).first.content_type
+        send_data(attachment.file_data, type: content_type)
       end
     end
   end
