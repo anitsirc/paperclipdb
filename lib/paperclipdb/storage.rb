@@ -1,7 +1,6 @@
 module Paperclip
   module Storage
     module Database
-      
       def self.extended(base)
         base.instance_eval do
           override_default_options base
@@ -17,7 +16,6 @@ module Paperclip
       def exists?(style = default_style)
         return not(getAttachment(path(style)).nil?)
       end
-    
 
       def getAttachment(file_path)
         file_path = rel_path(file_path)
@@ -42,7 +40,7 @@ module Paperclip
           attachment = Paperclipdb::Attachment.new
           attachment.base_name = File.basename(rel_path(path(style)))
           attachment.dir_name = File.dirname(rel_path(path(style)))
-          attachment.content_type = self.instance_variable_get("@_#{self.name.to_s}_content_type")
+          attachment.content_type = file.content_type
           attachment.file_size = file.size
           attachment.file_data = file.read
           attachment.save
